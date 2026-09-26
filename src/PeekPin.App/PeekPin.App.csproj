@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>PeekPin</RootNamespace>
+    <AssemblyName>PeekPin</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Version>1.0.0</Version>
+    <Authors>Le Van Son</Authors>
+    <Company>Le Van Son</Company>
+    <Product>PeekPin</Product>
+    <ApplicationIcon>Assets\PeekPin.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Using Include="System.IO" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\PeekPin.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Strings.en.resx">
+      <Culture></Culture>
+      <WithCulture>false</WithCulture>
+      <LogicalName>PeekPin.Strings.en.resources</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PeekPin.Core\PeekPin.Core.csproj" />
+    <ProjectReference Include="..\PeekPin.Win32\PeekPin.Win32.csproj" />
+  </ItemGroup>
+</Project>

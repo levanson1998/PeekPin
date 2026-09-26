@@ -1,0 +1,144 @@
+<Window x:Class="PeekPin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PeekPin"
+        Icon="Assets/PeekPin.ico"
+        Width="520"
+        Height="640"
+        MinWidth="420"
+        MinHeight="480"
+        WindowStartupLocation="CenterScreen"
+        ShowInTaskbar="False"
+        ResizeMode="CanResize"
+        Background="#F3F5F8"
+        FontFamily="Segoe UI"
+        TextOptions.TextFormattingMode="Display">
+    <Window.Resources>
+        <Style x:Key="SoftButton" TargetType="Button">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="#1F2937" />
+            <Setter Property="BorderBrush" Value="#D5DBE3" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="12,6" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Chrome" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Chrome" Property="Background" Value="#EEF3FF" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Chrome" Property="Background" Value="#E0E8FF" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="QuietButton" TargetType="Button" BasedOn="{StaticResource SoftButton}">
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Margin" Value="6,0,0,0" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+        <Style x:Key="DangerButton" TargetType="Button" BasedOn="{StaticResource QuietButton}">
+            <Setter Property="Foreground" Value="#9F1239" />
+            <Setter Property="BorderBrush" Value="#F3C3CF" />
+        </Style>
+    </Window.Resources>
+    <DockPanel Margin="16">
+        <Grid DockPanel.Dock="Top" Margin="0,0,0,14">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Width="36" Height="36" Margin="0,0,12,0" Source="Assets/PeekPin.ico" />
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock x:Name="HeaderText" FontSize="20" FontWeight="SemiBold" Foreground="#111827" />
+                <TextBlock x:Name="DeveloperText" FontSize="12" Foreground="#6B7280" Margin="0,2,0,0" />
+            </StackPanel>
+        </Grid>
+
+        <Expander x:Name="SettingsPanel" DockPanel.Dock="Bottom" Margin="0,12,0,0"
+                  Background="White" BorderBrush="#E5E7EB" BorderThickness="1" Padding="8">
+            <Expander.Header>
+                <TextBlock x:Name="SettingsHeader" FontWeight="SemiBold" Foreground="#111827" />
+            </Expander.Header>
+            <StackPanel Margin="0,8,0,0">
+                <DockPanel Margin="0,4">
+                    <TextBlock x:Name="LanguageLabel" Width="190" VerticalAlignment="Center" Foreground="#374151" />
+                    <ComboBox x:Name="LanguageBox" Width="140" HorizontalAlignment="Left" Padding="6,4" SelectionChanged="OnLanguageChanged" />
+                </DockPanel>
+                <DockPanel Margin="0,4">
+                    <TextBlock x:Name="HoverLabel" Width="190" VerticalAlignment="Center" Foreground="#374151" />
+                    <TextBox x:Name="HoverBox" Padding="6,4" />
+                </DockPanel>
+                <DockPanel Margin="0,4">
+                    <TextBlock x:Name="HideLabel" Width="190" VerticalAlignment="Center" Foreground="#374151" />
+                    <TextBox x:Name="HideBox" Padding="6,4" />
+                </DockPanel>
+                <DockPanel Margin="0,4">
+                    <TextBlock x:Name="SizeLabel" Width="190" VerticalAlignment="Center" Foreground="#374151" />
+                    <ComboBox x:Name="SizeBox" Width="88" HorizontalAlignment="Left" Padding="6,4" />
+                </DockPanel>
+                <CheckBox x:Name="RememberBox" Margin="0,6,0,2" />
+                <CheckBox x:Name="StartupBox" Margin="0,2" />
+                <CheckBox x:Name="FullscreenBox" Margin="0,2" />
+                <Button x:Name="SaveButton" Style="{StaticResource SoftButton}" HorizontalAlignment="Left" Margin="0,10,0,0" Click="OnSave" />
+            </StackPanel>
+        </Expander>
+
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button x:Name="AddButton" Style="{StaticResource SoftButton}" Click="OnAdd" />
+            <Button x:Name="BackButton" Style="{StaticResource SoftButton}" Click="OnBack" Visibility="Collapsed" />
+        </StackPanel>
+
+        <Border Background="White" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="12" Padding="6">
+            <Grid>
+                <ListBox x:Name="WatchedList"
+                         BorderThickness="0"
+                         Background="Transparent"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         HorizontalContentAlignment="Stretch">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="Padding" Value="4" />
+                            <Setter Property="Margin" Value="0,2" />
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border x:Name="Row" Background="Transparent" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="Stretch" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Row" Property="Background" Value="#F8FAFC" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+                <TextBlock x:Name="EmptyText" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           TextWrapping="Wrap" TextAlignment="Center" Foreground="#6B7280"
+                           Margin="24" MaxWidth="280" />
+            </Grid>
+        </Border>
+    </DockPanel>
+</Window>

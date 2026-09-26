@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="SelectWindowPrompt" xml:space="preserve"><value>Chọn một cửa sổ để ghim</value></data>
+  <data name="InaccessibleStatus" xml:space="preserve"><value>Cửa sổ đang chạy quyền cao hơn PeekPin</value></data>
+  <data name="Dock" xml:space="preserve"><value>Thu vào icon</value></data>
+  <data name="Unwatch" xml:space="preserve"><value>Bỏ theo dõi</value></data>
+  <data name="AddWindow" xml:space="preserve"><value>Thêm cửa sổ</value></data>
+  <data name="ShowAndKeep" xml:space="preserve"><value>Hiện và giữ</value></data>
+  <data name="Minimize" xml:space="preserve"><value>Thu nhỏ</value></data>
+  <data name="Settings" xml:space="preserve"><value>Cài đặt</value></data>
+  <data name="Pause" xml:space="preserve"><value>Tạm dừng</value></data>
+  <data name="Resume" xml:space="preserve"><value>Tiếp tục</value></data>
+  <data name="Quit" xml:space="preserve"><value>Quit</value></data>
+  <data name="PhaseVisible" xml:space="preserve"><value>Đang mở</value></data>
+  <data name="PhaseDocked" xml:space="preserve"><value>Đã thu</value></data>
+  <data name="PhasePeeking" xml:space="preserve"><value>Đang xem tạm</value></data>
+  <data name="PhaseUnbound" xml:space="preserve"><value>Chưa mở</value></data>
+  <data name="PhaseInaccessible" xml:space="preserve"><value>Không truy cập được</value></data>
+  <data name="HoverDelay" xml:space="preserve"><value>Độ trễ hover (ms)</value></data>
+  <data name="HideDelay" xml:space="preserve"><value>Độ trễ ẩn (ms)</value></data>
+  <data name="IconSize" xml:space="preserve"><value>Cỡ icon</value></data>
+  <data name="RememberPosition" xml:space="preserve"><value>Nhớ vị trí icon</value></data>
+  <data name="StartWithWindows" xml:space="preserve"><value>Chạy cùng Windows</value></data>
+  <data name="HideIconWhenFullscreen" xml:space="preserve"><value>Ẩn icon khi có app fullscreen</value></data>
+  <data name="WatchedTitle" xml:space="preserve"><value>Đang theo dõi</value></data>
+  <data name="CatalogTitle" xml:space="preserve"><value>Cửa sổ đang mở</value></data>
+  <data name="AppTitle" xml:space="preserve"><value>PeekPin</value></data>
+  <data name="DeveloperName" xml:space="preserve"><value>Le Van Son</value></data>
+  <data name="Back" xml:space="preserve"><value>Quay lại</value></data>
+  <data name="Save" xml:space="preserve"><value>Lưu</value></data>
+  <data name="NoWindows" xml:space="preserve"><value>Không thấy cửa sổ nào để thêm</value></data>
+  <data name="Language" xml:space="preserve"><value>Ngôn ngữ</value></data>
+</root>

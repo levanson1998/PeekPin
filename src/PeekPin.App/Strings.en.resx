@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="SelectWindowPrompt" xml:space="preserve"><value>Choose a window to pin</value></data>
+  <data name="InaccessibleStatus" xml:space="preserve"><value>This window is running with higher privileges than PeekPin</value></data>
+  <data name="Dock" xml:space="preserve"><value>Dock to icon</value></data>
+  <data name="Unwatch" xml:space="preserve"><value>Stop watching</value></data>
+  <data name="AddWindow" xml:space="preserve"><value>Add window</value></data>
+  <data name="ShowAndKeep" xml:space="preserve"><value>Show and keep</value></data>
+  <data name="Minimize" xml:space="preserve"><value>Minimize</value></data>
+  <data name="Settings" xml:space="preserve"><value>Settings</value></data>
+  <data name="Pause" xml:space="preserve"><value>Pause</value></data>
+  <data name="Resume" xml:space="preserve"><value>Resume</value></data>
+  <data name="Quit" xml:space="preserve"><value>Quit</value></data>
+  <data name="PhaseVisible" xml:space="preserve"><value>Open</value></data>
+  <data name="PhaseDocked" xml:space="preserve"><value>Docked</value></data>
+  <data name="PhasePeeking" xml:space="preserve"><value>Peeking</value></data>
+  <data name="PhaseUnbound" xml:space="preserve"><value>Not open</value></data>
+  <data name="PhaseInaccessible" xml:space="preserve"><value>Inaccessible</value></data>
+  <data name="HoverDelay" xml:space="preserve"><value>Hover delay (ms)</value></data>
+  <data name="HideDelay" xml:space="preserve"><value>Hide delay (ms)</value></data>
+  <data name="IconSize" xml:space="preserve"><value>Icon size</value></data>
+  <data name="RememberPosition" xml:space="preserve"><value>Remember icon position</value></data>
+  <data name="StartWithWindows" xml:space="preserve"><value>Start with Windows</value></data>
+  <data name="HideIconWhenFullscreen" xml:space="preserve"><value>Hide icon during fullscreen</value></data>
+  <data name="WatchedTitle" xml:space="preserve"><value>Watching</value></data>
+  <data name="CatalogTitle" xml:space="preserve"><value>Open windows</value></data>
+  <data name="AppTitle" xml:space="preserve"><value>PeekPin</value></data>
+  <data name="DeveloperName" xml:space="preserve"><value>Le Van Son</value></data>
+  <data name="Back" xml:space="preserve"><value>Back</value></data>
+  <data name="Save" xml:space="preserve"><value>Save</value></data>
+  <data name="NoWindows" xml:space="preserve"><value>No windows to add</value></data>
+  <data name="Language" xml:space="preserve"><value>Language</value></data>
+</root>
