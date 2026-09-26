@@ -3,13 +3,34 @@ param(
     [switch]$Silent
 )
 
+function Resolve-AppDirectory {
+    param([string]$Requested)
+
+    if ($Requested -and (Test-Path (Join-Path $Requested "PeekPin.exe"))) {
+        return (Resolve-Path $Requested).Path
+    }
+
+    $candidates = @(
+        (Join-Path $PSScriptRoot "app"),
+        (Join-Path $PSScriptRoot "..\artifacts\publish"),
+        (Join-Path $PSScriptRoot "..\dist\PeekPin-1.0.0-win-x64\app")
+    )
+    foreach ($candidate in $candidates) {
+        if (Test-Path (Join-Path $candidate "PeekPin.exe")) {
+            return (Resolve-Path $candidate).Path
+        }
+    }
+
+    return (Join-Path $PSScriptRoot "app")
+}
+
 $ErrorActionPreference = "Stop"
 $installDir = Join-Path $env:LOCALAPPDATA "Programs\PeekPin"
-$sourceDir = if ($Source) { $Source } else { Join-Path $PSScriptRoot "app" }
+$sourceDir = Resolve-AppDirectory $Source
 $exe = Join-Path $sourceDir "PeekPin.exe"
 
 if (-not (Test-Path $exe)) {
-    throw "PeekPin.exe was not found in $sourceDir"
+    throw "PeekPin.exe was not found. From the repo, run installer\build.ps1 first, then Setup.cmd."
 }
 
 Get-Process PeekPin -ErrorAction SilentlyContinue | Stop-Process -Force
