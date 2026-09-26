@@ -124,6 +124,11 @@ public sealed class AppController : IDisposable
 
     public void Unwatch(SessionHost host)
     {
+        if (!_sessions.Contains(host))
+        {
+            return;
+        }
+
         host.Apply(host.Session.StopTracking());
         _sessions.Remove(host);
         Config.Targets.Remove(host.Session.Target);
@@ -240,8 +245,13 @@ public sealed class AppController : IDisposable
     private void OnDestroyed(WindowId id)
     {
         var host = Find(id);
-        host?.OnDestroyed();
-        SessionsChanged?.Invoke();
+        if (host is null)
+        {
+            return;
+        }
+
+        Log.Info($"window closed hwnd={id} title={host.Title}");
+        Unwatch(host);
     }
 
     private void OnShown(WindowId id) => TryBindUnbound();

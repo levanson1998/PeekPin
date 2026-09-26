@@ -10,15 +10,21 @@ Phiên bản 1.0.0. Windows 10 64-bit và Windows 11 dùng cùng một bản. Ng
 
 ### Cài đặt
 
-Cần [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) để build. Máy chỉ chạy app thì không cần SDK nếu dùng bản self-contained.
+Máy mới không tải package và không cần cài .NET. Bộ cài đã gồm app và runtime.
+
+Trên máy build (cần [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)):
 
 ```powershell
-dotnet publish src/PeekPin.App -c Release -r win-x64 --self-contained true -p:PublishSingleFile=false
+.\installer\build.ps1
 ```
 
-Chạy `src/PeekPin.App/bin/Release/net8.0-windows/win-x64/publish/PeekPin.exe`.
+Lệnh này tạo `dist\PeekPin-1.0.0-win-x64\`. Copy cả thư mục sang máy mới, rồi chạy `Setup.cmd`. Cài cho user hiện tại, không cần quyền Admin:
 
-Gỡ: chuột phải icon khay, chọn Quit. Xóa thư mục app và `%AppData%\PeekPin`. Nếu đã bật chạy cùng Windows, xóa value `PeekPin` trong `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`.
+- File nằm ở `%LocalAppData%\Programs\PeekPin`
+- Shortcut trong Start Menu
+- Mục gỡ trong Settings > Apps
+
+Gỡ: Settings > Apps > PeekPin > Uninstall, hoặc chạy `%LocalAppData%\Programs\PeekPin\Uninstall.cmd`. Gỡ xóa file app, shortcut và mục chạy cùng Windows. Cấu hình trong `%AppData%\PeekPin` được giữ. Thêm `-RemoveUserData` khi gọi `Uninstall.ps1` nếu muốn xóa luôn cấu hình và log.
 
 ### Cách dùng
 
@@ -32,6 +38,7 @@ Gỡ: chuột phải icon khay, chọn Quit. Xóa thư mục app và `%AppData%\
 8. Chuột phải icon: Hiện và giữ, Thu nhỏ, Bỏ theo dõi, Cài đặt. Không có Quit trên icon.
 9. Chuột phải khay: Thêm cửa sổ, Tạm dừng / Tiếp tục, Cài đặt, Quit.
 10. Trong **Cài đặt**, chọn **Ngôn ngữ**: Tiếng Việt hoặc English. Giao diện đổi ngay và được nhớ cho lần mở sau.
+11. Tắt hẳn cửa sổ đang theo dõi thì PeekPin tự xóa dòng đó. Mở lại app đích sau đó không tự được theo dõi lại.
 
 Quit chỉ tắt PeekPin. Cửa sổ đang xem tạm được thu nhỏ lại. Cửa sổ đang mở được giữ nguyên vị trí và hết always-on-top. App đích vẫn chạy.
 
@@ -70,6 +77,7 @@ dotnet test PeekPin.sln -c Release
 - `src/PeekPin.Win32` — User32: placement, topmost, catalog, hook.
 - `src/PeekPin.App` — WPF, icon nổi, khay.
 - `tests/PeekPin.Core.Tests`, `tests/PeekPin.Win32.Tests`, `tests/PeekPin.App.Tests`.
+- `installer` — bản cài per-user, self-contained, không tải gì trên máy đích.
 
 Code viết bằng tiếng Anh. Chữ trên UI nằm trong `Strings.resx` (tiếng Việt) và `Strings.en.resx` (tiếng Anh).
 
@@ -88,15 +96,21 @@ Version 1.0.0. Windows 10 64-bit and Windows 11 use the same build. The interfac
 
 ### Install
 
-Building needs the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0). A machine that only runs the self-contained build does not need the SDK.
+A new PC does not download packages and does not need .NET installed. The setup already contains the app and the runtime.
+
+On a build machine (needs the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)):
 
 ```powershell
-dotnet publish src/PeekPin.App -c Release -r win-x64 --self-contained true -p:PublishSingleFile=false
+.\installer\build.ps1
 ```
 
-Run `src/PeekPin.App/bin/Release/net8.0-windows/win-x64/publish/PeekPin.exe`.
+That writes `dist\PeekPin-1.0.0-win-x64\`. Copy the whole folder to the new PC and run `Setup.cmd`. It installs for the current user and does not need Administrator:
 
-Uninstall: right-click the tray icon and choose Quit. Delete the app folder and `%AppData%\PeekPin`. If start-with-Windows was enabled, delete the `PeekPin` value under `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`.
+- Files go to `%LocalAppData%\Programs\PeekPin`
+- A Start Menu shortcut is created
+- An entry appears in Settings > Apps
+
+Uninstall from Settings > Apps > PeekPin > Uninstall, or run `%LocalAppData%\Programs\PeekPin\Uninstall.cmd`. Uninstall removes the app files, the shortcut, and the start-with-Windows entry. Settings in `%AppData%\PeekPin` stay. Pass `-RemoveUserData` to `Uninstall.ps1` to delete settings and logs as well.
 
 ### How to use
 
@@ -110,6 +124,7 @@ Uninstall: right-click the tray icon and choose Quit. Delete the app folder and 
 8. Right-click the icon: Show and keep, Minimize, Stop watching, Settings. There is no Quit on the icon.
 9. Right-click the tray: Add window, Pause / Resume, Settings, Quit.
 10. In **Settings**, choose **Language**: Tiếng Việt or English. The interface switches immediately and the choice is kept for the next launch.
+11. Closing a watched window removes that row. Opening the target app again does not watch it automatically.
 
 Quit only closes PeekPin. A window that was being peeked is minimized. A window that was already open stays where it is and loses always-on-top. The target app keeps running.
 
@@ -148,6 +163,7 @@ dotnet test PeekPin.sln -c Release
 - `src/PeekPin.Win32` — User32: placement, topmost, catalog, hook.
 - `src/PeekPin.App` — WPF, float icon, tray.
 - `tests/PeekPin.Core.Tests`, `tests/PeekPin.Win32.Tests`, `tests/PeekPin.App.Tests`.
+- `installer` — per-user self-contained setup. The target PC downloads nothing.
 
 Code is written in English. UI copy lives in `Strings.resx` (Vietnamese) and `Strings.en.resx` (English).
 

@@ -71,8 +71,15 @@ public sealed class SessionHost : IDisposable
 
     public void SyncWindowState()
     {
-        if (_disposed || Session.Window.IsEmpty || !_gateway.IsAlive(Session.Window))
+        if (_disposed || Session.Window.IsEmpty)
         {
+            return;
+        }
+
+        if (!_gateway.IsAlive(Session.Window))
+        {
+            _controller.Log.Info($"window gone hwnd={Session.Window}");
+            _controller.Unwatch(this);
             return;
         }
 
