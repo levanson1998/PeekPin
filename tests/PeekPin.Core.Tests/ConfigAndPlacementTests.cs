@@ -100,6 +100,9 @@ public class ConfigAndPlacementTests
         Assert.True(FullscreenClassifier.IsBorderlessFullscreen(monitor, monitor, false));
         Assert.False(FullscreenClassifier.IsBorderlessFullscreen(monitor, monitor, true));
         Assert.False(FullscreenClassifier.IsBorderlessFullscreen(new PixelRect(0, 0, 800, 600), monitor, false));
+        Assert.True(FullscreenClassifier.IsShellDesktop("Progman"));
+        Assert.True(FullscreenClassifier.IsShellDesktop("WorkerW"));
+        Assert.False(FullscreenClassifier.IsShellDesktop("Notepad"));
     }
 
     private static WindowSnapshot Snap(bool tool = false, string title = "Title", bool cloaked = false, int pid = 2)

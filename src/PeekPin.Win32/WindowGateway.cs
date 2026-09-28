@@ -178,6 +178,11 @@ public sealed class WindowGateway : IWindowGateway
             return false;
         }
 
+        if (FullscreenClassifier.IsShellDesktop(ReadClass(hwnd)))
+        {
+            return false;
+        }
+
         var style = NativeMethods.GetWindowLongPtr(hwnd, NativeMethods.GwlStyle);
         var hasCaption = (style & NativeMethods.WsCaption) == NativeMethods.WsCaption;
         if (!NativeMethods.GetWindowRect(hwnd, out var rect))
