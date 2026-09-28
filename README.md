@@ -14,9 +14,9 @@ Máy mới không tải package và không cần cài .NET. Bộ cài đã gồm
 
 `release/PeekPin-1.0.0-win-x64.zip`
 
-Giải nén, rồi chạy `Setup.cmd`. Không cần build. Cài cho user hiện tại, không cần quyền Admin:
+Giải nén, rồi chạy `Setup.cmd`. Không cần build. Windows sẽ hỏi quyền Administrator.
 
-- File nằm ở `%LocalAppData%\Programs\PeekPin`
+- File nằm ở `C:\Program Files\PeekPin`
 - Shortcut trong Start Menu
 - Mục gỡ trong Settings > Apps
 
@@ -28,7 +28,7 @@ Muốn tạo lại bộ cài trên máy build (cần [.NET 8 SDK](https://dotnet
 
 Lệnh này tạo `dist\PeekPin-1.0.0-win-x64\`. Nén thư mục đó thành `release\PeekPin-1.0.0-win-x64.zip` nếu cần cập nhật bản trong repo.
 
-Gỡ: Settings > Apps > PeekPin > Uninstall, hoặc chạy `%LocalAppData%\Programs\PeekPin\Uninstall.cmd`. Gỡ xóa file app, shortcut và mục chạy cùng Windows. Cấu hình trong `%AppData%\PeekPin` được giữ. Thêm `-RemoveUserData` khi gọi `Uninstall.ps1` nếu muốn xóa luôn cấu hình và log.
+Gỡ: Settings > Apps > PeekPin > Uninstall, hoặc chạy `C:\Program Files\PeekPin\Uninstall.cmd`. Gỡ xóa file app, shortcut và mục chạy cùng Windows. Cấu hình trong `%AppData%\PeekPin` được giữ. Thêm `-RemoveUserData` khi gọi `Uninstall.ps1` nếu muốn xóa luôn cấu hình và log.
 
 ### Cách dùng
 
@@ -104,9 +104,9 @@ A new PC does not download packages and does not need .NET installed. The setup 
 
 `release/PeekPin-1.0.0-win-x64.zip`
 
-Unzip it and run `Setup.cmd`. No build step. It installs for the current user and does not need Administrator:
+Unzip it and run `Setup.cmd`. No build step. Windows asks for Administrator approval.
 
-- Files go to `%LocalAppData%\Programs\PeekPin`
+- Files go to `C:\Program Files\PeekPin`
 - A Start Menu shortcut is created
 - An entry appears in Settings > Apps
 
@@ -118,7 +118,7 @@ To rebuild the setup on a build machine (needs the [.NET 8 SDK](https://dotnet.m
 
 That writes `dist\PeekPin-1.0.0-win-x64\`. Zip that folder to `release\PeekPin-1.0.0-win-x64.zip` when the copy in the repo should be updated.
 
-Uninstall from Settings > Apps > PeekPin > Uninstall, or run `%LocalAppData%\Programs\PeekPin\Uninstall.cmd`. Uninstall removes the app files, the shortcut, and the start-with-Windows entry. Settings in `%AppData%\PeekPin` stay. Pass `-RemoveUserData` to `Uninstall.ps1` to delete settings and logs as well.
+Uninstall from Settings > Apps > PeekPin > Uninstall, or run `C:\Program Files\PeekPin\Uninstall.cmd`. Uninstall removes the app files, the shortcut, and the start-with-Windows entry. Settings in `%AppData%\PeekPin` stay. Pass `-RemoveUserData` to `Uninstall.ps1` to delete settings and logs as well.
 
 ### How to use
 
