@@ -10,19 +10,23 @@ Phiên bản 1.0.0. Windows 10 64-bit và Windows 11 dùng cùng một bản. Ng
 
 ### Cài đặt
 
-Máy mới không tải package và không cần cài .NET. Bộ cài đã gồm app và runtime.
+Máy mới không tải package và không cần cài .NET. Bộ cài đã gồm app và runtime, nằm sẵn trong repo:
 
-Trên máy build (cần [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)):
+`release/PeekPin-1.0.0-win-x64.zip`
+
+Giải nén, rồi chạy `Setup.cmd`. Không cần build. Cài cho user hiện tại, không cần quyền Admin:
+
+- File nằm ở `%LocalAppData%\Programs\PeekPin`
+- Shortcut trong Start Menu
+- Mục gỡ trong Settings > Apps
+
+Muốn tạo lại bộ cài trên máy build (cần [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)):
 
 ```powershell
 .\installer\build.ps1
 ```
 
-Lệnh này tạo `dist\PeekPin-1.0.0-win-x64\`. Copy cả thư mục sang máy mới, rồi chạy `Setup.cmd`. Cài cho user hiện tại, không cần quyền Admin:
-
-- File nằm ở `%LocalAppData%\Programs\PeekPin`
-- Shortcut trong Start Menu
-- Mục gỡ trong Settings > Apps
+Lệnh này tạo `dist\PeekPin-1.0.0-win-x64\`. Nén thư mục đó thành `release\PeekPin-1.0.0-win-x64.zip` nếu cần cập nhật bản trong repo.
 
 Gỡ: Settings > Apps > PeekPin > Uninstall, hoặc chạy `%LocalAppData%\Programs\PeekPin\Uninstall.cmd`. Gỡ xóa file app, shortcut và mục chạy cùng Windows. Cấu hình trong `%AppData%\PeekPin` được giữ. Thêm `-RemoveUserData` khi gọi `Uninstall.ps1` nếu muốn xóa luôn cấu hình và log.
 
@@ -96,19 +100,23 @@ Version 1.0.0. Windows 10 64-bit and Windows 11 use the same build. The interfac
 
 ### Install
 
-A new PC does not download packages and does not need .NET installed. The setup already contains the app and the runtime.
+A new PC does not download packages and does not need .NET installed. The setup already contains the app and the runtime, and it is already in the repo:
 
-On a build machine (needs the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)):
+`release/PeekPin-1.0.0-win-x64.zip`
+
+Unzip it and run `Setup.cmd`. No build step. It installs for the current user and does not need Administrator:
+
+- Files go to `%LocalAppData%\Programs\PeekPin`
+- A Start Menu shortcut is created
+- An entry appears in Settings > Apps
+
+To rebuild the setup on a build machine (needs the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)):
 
 ```powershell
 .\installer\build.ps1
 ```
 
-That writes `dist\PeekPin-1.0.0-win-x64\`. Copy the whole folder to the new PC and run `Setup.cmd`. It installs for the current user and does not need Administrator:
-
-- Files go to `%LocalAppData%\Programs\PeekPin`
-- A Start Menu shortcut is created
-- An entry appears in Settings > Apps
+That writes `dist\PeekPin-1.0.0-win-x64\`. Zip that folder to `release\PeekPin-1.0.0-win-x64.zip` when the copy in the repo should be updated.
 
 Uninstall from Settings > Apps > PeekPin > Uninstall, or run `%LocalAppData%\Programs\PeekPin\Uninstall.cmd`. Uninstall removes the app files, the shortcut, and the start-with-Windows entry. Settings in `%AppData%\PeekPin` stay. Pass `-RemoveUserData` to `Uninstall.ps1` to delete settings and logs as well.
 
