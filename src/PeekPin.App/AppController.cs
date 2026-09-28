@@ -72,7 +72,6 @@ public sealed class AppController : IDisposable
     {
         Config.Language = code;
         UiLanguage.Apply(code);
-        Save();
         LanguageChanged?.Invoke();
     }
 
@@ -117,7 +116,6 @@ public sealed class AppController : IDisposable
             }
         }
 
-        Save();
         SessionsChanged?.Invoke();
         return host;
     }
@@ -133,7 +131,6 @@ public sealed class AppController : IDisposable
         _sessions.Remove(host);
         Config.Targets.Remove(host.Session.Target);
         host.Dispose();
-        Save();
         SessionsChanged?.Invoke();
     }
 
@@ -179,7 +176,6 @@ public sealed class AppController : IDisposable
             host.Apply(host.Session.Quit());
         }
 
-        Save();
         Dispose();
     }
 
@@ -250,7 +246,6 @@ public sealed class AppController : IDisposable
             return;
         }
 
-        Log.Info($"window closed hwnd={id} title={host.Title}");
         Unwatch(host);
     }
 

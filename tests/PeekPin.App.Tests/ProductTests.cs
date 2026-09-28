@@ -94,13 +94,12 @@ public class ProductTests
             scope.Dock(watched.Host);
             StaPump.Wait(TimeSpan.FromMilliseconds(200));
             var center = Center(watched.Host);
+            var beforeX = watched.Host.Session.Target.IconX;
             MouseInput.Drag(center.X, center.Y, center.X + 80, center.Y + 40);
             StaPump.Wait(TimeSpan.FromMilliseconds(300));
             Assert.True(scope.Gateway.IsMinimized(watched.Id));
-            var savedX = watched.Host.Session.Target.IconX;
-            var savedY = watched.Host.Session.Target.IconY;
-            var reloaded = new AppConfigStore(scope.Directory).Load();
-            Assert.Contains(reloaded.Targets, target => target.IconX == savedX && target.IconY == savedY);
+            Assert.NotEqual(beforeX, watched.Host.Session.Target.IconX);
+            Assert.False(File.Exists(Path.Combine(scope.Directory, "config.json")));
             Assert.False(File.Exists(Path.Combine(scope.Directory, "config.json.tmp")));
         });
     }

@@ -78,7 +78,6 @@ public sealed class SessionHost : IDisposable
 
         if (!_gateway.IsAlive(Session.Window))
         {
-            _controller.Log.Info($"window gone hwnd={Session.Window}");
             _controller.Unwatch(this);
             return;
         }
@@ -96,7 +95,6 @@ public sealed class SessionHost : IDisposable
         var minimized = _gateway.IsMinimized(Session.Window);
         if (Session.Phase == SessionPhase.Visible && minimized)
         {
-            _controller.Log.Info($"window minimized hwnd={Session.Window} phase={Session.Phase}");
             OnUserMinimized();
             return;
         }
@@ -110,14 +108,12 @@ public sealed class SessionHost : IDisposable
             else if (_sawIconicWhileDocked)
             {
                 _sawIconicWhileDocked = false;
-                _controller.Log.Info($"window restored hwnd={Session.Window}");
                 Apply(Session.Pin());
                 return;
             }
 
             if (!Icon.IsVisible)
             {
-                _controller.Log.Info($"show icon hwnd={Session.Window}");
                 ShowIcon();
             }
         }
@@ -205,8 +201,7 @@ public sealed class SessionHost : IDisposable
                     }
                     break;
                 case SessionCommandKind.ClearTopmost:
-                    var cleared = _gateway.TrySetTopmost(id, false);
-                    _controller.Log.Info($"clear topmost hwnd={id} ok={cleared}");
+                    _gateway.TrySetTopmost(id, false);
                     break;
                 case SessionCommandKind.ShowFloatIcon:
                     ShowIcon();
@@ -282,7 +277,6 @@ public sealed class SessionHost : IDisposable
             _controller.Config.IconSize);
         Session.Target.IconX = relative.X;
         Session.Target.IconY = relative.Y;
-        _controller.Save();
     }
 
     private void OnIconEnter()

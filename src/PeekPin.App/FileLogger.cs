@@ -8,13 +8,10 @@ public sealed class FileLogger
 
     public FileLogger(string directory)
     {
-        Directory.CreateDirectory(directory);
         _path = Path.Combine(directory, "peekpin.log");
     }
 
     public string FilePath => _path;
-
-    public void Info(string message) => Write("INFO", message);
 
     public void Error(string message) => Write("ERROR", message);
 
@@ -24,6 +21,7 @@ public sealed class FileLogger
         {
             lock (_gate)
             {
+                Directory.CreateDirectory(Path.GetDirectoryName(_path)!);
                 if (File.Exists(_path) && new FileInfo(_path).Length > MaxBytes)
                 {
                     File.Delete(_path);
@@ -32,7 +30,7 @@ public sealed class FileLogger
                 File.AppendAllText(_path, $"{DateTime.Now:O} {level} {message}{Environment.NewLine}");
             }
         }
-        catch (IOException)
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
         }
     }

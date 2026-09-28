@@ -58,7 +58,7 @@ Quit chỉ tắt PeekPin. Cửa sổ đang xem tạm được thu nhỏ lại. C
 | Chạy cùng Windows | Tắt |
 | Ẩn icon khi có app fullscreen | Bật |
 
-Cấu hình nằm ở `%AppData%\PeekPin\config.json`. Log nằm ở `%AppData%\PeekPin\logs\peekpin.log`.
+Bấm **Lưu** thì cấu hình, danh sách đang theo dõi và vị trí icon được ghi vào `%AppData%\PeekPin\config.json`. Trước lúc bấm Lưu, những thay đổi chỉ nằm trong bộ nhớ và mất khi thoát. Log chỉ ghi khi có lỗi, tại `%AppData%\PeekPin\logs\peekpin.log`.
 
 ### Giới hạn
 
@@ -90,7 +90,7 @@ Code viết bằng tiếng Anh. Chữ trên UI nằm trong `Strings.resx` (tiế
 - Không thấy cửa sổ trong danh sách: cửa sổ không có tiêu đề, là tool window, hoặc đang bị ẩn.
 - Icon không hiện: đang Tạm dừng, hoặc có app fullscreen và mục ẩn icon đang bật.
 - Không nổi được: cửa sổ quyền cao hơn PeekPin. Dòng đó hiện cảnh báo.
-- Lỗi khác: xem `peekpin.log`. Log ghi tên process, HWND và mã lỗi, không ghi nội dung cửa sổ.
+- Lỗi khác: xem `peekpin.log` nếu file đã được tạo. Log chỉ ghi lỗi, gồm tên process, HWND và mã lỗi, không ghi nội dung cửa sổ.
 
 ## English
 
@@ -148,7 +148,7 @@ Quit only closes PeekPin. A window that was being peeked is minimized. A window 
 | Start with Windows | Off |
 | Hide icon during fullscreen | On |
 
-Configuration is stored at `%AppData%\PeekPin\config.json`. The log is at `%AppData%\PeekPin\logs\peekpin.log`.
+Click **Save** to write settings, the watched list, and icon positions to `%AppData%\PeekPin\config.json`. Until then those changes stay in memory and are discarded on exit. The log is written only for errors, at `%AppData%\PeekPin\logs\peekpin.log`.
 
 ### Limits
 
@@ -180,4 +180,4 @@ Code is written in English. UI copy lives in `Strings.resx` (Vietnamese) and `St
 - A window is missing from the list: it has no title, it is a tool window, or it is hidden.
 - The icon does not appear: Pause is on, or a fullscreen app is active and hide-during-fullscreen is on.
 - The window will not stay on top: it has higher privileges than PeekPin. That row shows a warning.
-- Anything else: read `peekpin.log`. The log records the process name, HWND, and error code. It does not record window contents.
+- Anything else: read `peekpin.log` if that file exists. It records errors only: process name, HWND, and error code. It does not record window contents.
