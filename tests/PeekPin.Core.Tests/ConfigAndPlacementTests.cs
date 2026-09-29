@@ -103,6 +103,10 @@ public class ConfigAndPlacementTests
         Assert.True(FullscreenClassifier.IsShellDesktop("Progman"));
         Assert.True(FullscreenClassifier.IsShellDesktop("WorkerW"));
         Assert.False(FullscreenClassifier.IsShellDesktop("Notepad"));
+        Assert.False(FullscreenClassifier.ShouldHideFloatIcon("Chrome_WidgetWin_1", true, false, false, monitor, monitor));
+        Assert.False(FullscreenClassifier.ShouldHideFloatIcon("Progman", false, false, false, monitor, monitor));
+        Assert.False(FullscreenClassifier.ShouldHideFloatIcon("Notepad", false, false, true, monitor, monitor));
+        Assert.True(FullscreenClassifier.ShouldHideFloatIcon("ApplicationFrameWindow", false, false, false, monitor, monitor));
     }
 
     private static WindowSnapshot Snap(bool tool = false, string title = "Title", bool cloaked = false, int pid = 2)

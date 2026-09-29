@@ -202,4 +202,53 @@ public class WindowGatewayTests
             form?.Invoke(() => form.Close());
         }
     }
+
+    [Fact]
+    public void MaximizedWindow_IsNotFullscreen()
+    {
+        if (!Environment.UserInteractive)
+        {
+            return;
+        }
+
+        var fixture = FixtureWindow.Start("PeekPin Maximized");
+        try
+        {
+            fixture.Form.Invoke(() => fixture.Form.WindowState = FormWindowState.Maximized);
+            Thread.Sleep(200);
+            Assert.False(_gateway.IsFullscreen(new WindowId(fixture.Hwnd)));
+        }
+        finally
+        {
+            FixtureWindow.Close(fixture.Form);
+        }
+    }
+
+    [Fact]
+    public void BorderlessMonitorWindow_IsFullscreen()
+    {
+        if (!Environment.UserInteractive)
+        {
+            return;
+        }
+
+        var fixture = FixtureWindow.Start("PeekPin Borderless");
+        try
+        {
+            fixture.Form.Invoke(() =>
+            {
+                var screen = Screen.FromHandle(fixture.Form.Handle);
+                fixture.Form.FormBorderStyle = FormBorderStyle.None;
+                fixture.Form.WindowState = FormWindowState.Normal;
+                fixture.Form.Bounds = screen.Bounds;
+            });
+            Thread.Sleep(200);
+            Assert.True(_gateway.IsFullscreen(new WindowId(fixture.Hwnd)));
+        }
+        finally
+        {
+            FixtureWindow.Close(fixture.Form);
+        }
+    }
+
 }

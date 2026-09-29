@@ -116,6 +116,10 @@ public sealed class SessionHost : IDisposable
             {
                 ShowIcon();
             }
+            else
+            {
+                Icon.KeepAboveOthers();
+            }
         }
         else if (Session.Phase == SessionPhase.Peeking && !Icon.IsVisible)
         {

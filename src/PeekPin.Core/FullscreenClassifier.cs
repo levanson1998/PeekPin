@@ -7,6 +7,22 @@ public static class FullscreenClassifier
         return className is "Progman" or "WorkerW" or "Shell_TrayWnd" or "Shell_SecondaryTrayWnd";
     }
 
+    public static bool ShouldHideFloatIcon(
+        string? className,
+        bool isZoomed,
+        bool isIconic,
+        bool hasCaption,
+        PixelRect window,
+        PixelRect monitor)
+    {
+        if (IsShellDesktop(className) || isZoomed || isIconic)
+        {
+            return false;
+        }
+
+        return IsBorderlessFullscreen(window, monitor, hasCaption);
+    }
+
     public static bool IsBorderlessFullscreen(PixelRect window, PixelRect monitor, bool hasCaption, int tolerancePx = 2)
     {
         if (hasCaption || window.Width <= 0 || window.Height <= 0)

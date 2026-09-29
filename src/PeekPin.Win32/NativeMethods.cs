@@ -125,6 +125,9 @@ internal static class NativeMethods
     [DllImport("user32.dll")]
     public static extern bool IsIconic(IntPtr hwnd);
 
+    [DllImport("user32.dll")]
+    public static extern bool IsZoomed(IntPtr hwnd);
+
     [DllImport("user32.dll", CharSet = CharSet.Unicode)]
     public static extern int GetWindowText(IntPtr hwnd, StringBuilder lpString, int nMaxCount);
 

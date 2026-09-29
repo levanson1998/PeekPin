@@ -2,6 +2,23 @@ namespace PeekPin;
 
 public static class NativeWindow
 {
+    public static void KeepTopmost(nint hwnd)
+    {
+        if (hwnd == 0)
+        {
+            return;
+        }
+
+        NativeMethods.SetWindowPos(
+            hwnd,
+            NativeMethods.HwndTopmost,
+            0,
+            0,
+            0,
+            0,
+            NativeMethods.SwpNoMove | NativeMethods.SwpNoSize | NativeMethods.SwpNoActivate);
+    }
+
     public static void MoveTopmostNoActivate(nint hwnd, int x, int y, int width, int height)
     {
         NativeMethods.SetWindowPos(

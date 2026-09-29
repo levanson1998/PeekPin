@@ -164,21 +164,34 @@ public sealed class WindowGateway : IWindowGateway
         return new PixelRect(rect.Left, rect.Top, rect.Width, rect.Height);
     }
 
-    public bool IsMinimized(WindowId id) => NativeMethods.IsWindow(id.Value) && NativeMethods.IsIconic(id.Value);
-
-    public bool IsAlive(WindowId id) => id.Value != 0 && NativeMethods.IsWindow(id.Value);
-
-    public WindowId GetForeground() => new(NativeMethods.GetForegroundWindow());
-
-    public bool IsFullscreenForeground()
+    public bool IsMinimized(WindowId id)
     {
-        var hwnd = NativeMethods.GetForegroundWindow();
+        var hwnd = id.Value;
         if (hwnd == 0 || !NativeMethods.IsWindow(hwnd))
         {
             return false;
         }
 
-        if (FullscreenClassifier.IsShellDesktop(ReadClass(hwnd)))
+        if (NativeMethods.IsIconic(hwnd))
+        {
+            return true;
+        }
+
+        var placement = CreatePlacement();
+        return NativeMethods.GetWindowPlacement(hwnd, ref placement)
+            && placement.ShowCmd is NativeMethods.SwShowMinimized or NativeMethods.SwShowMinNoActive;
+    }
+
+    public bool IsAlive(WindowId id) => id.Value != 0 && NativeMethods.IsWindow(id.Value);
+
+    public WindowId GetForeground() => new(NativeMethods.GetForegroundWindow());
+
+    public bool IsFullscreenForeground() => IsFullscreen(GetForeground());
+
+    public bool IsFullscreen(WindowId id)
+    {
+        var hwnd = id.Value;
+        if (hwnd == 0 || !NativeMethods.IsWindow(hwnd))
         {
             return false;
         }
@@ -199,7 +212,13 @@ public sealed class WindowGateway : IWindowGateway
 
         var window = new PixelRect(rect.Left, rect.Top, rect.Width, rect.Height);
         var bounds = new PixelRect(info.Monitor.Left, info.Monitor.Top, info.Monitor.Width, info.Monitor.Height);
-        return FullscreenClassifier.IsBorderlessFullscreen(window, bounds, hasCaption);
+        return FullscreenClassifier.ShouldHideFloatIcon(
+            ReadClass(hwnd),
+            NativeMethods.IsZoomed(hwnd),
+            NativeMethods.IsIconic(hwnd),
+            hasCaption,
+            window,
+            bounds);
     }
 
     public bool TryGetIntegrityBlocked(WindowId id)

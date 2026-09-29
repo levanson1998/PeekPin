@@ -76,6 +76,16 @@ public partial class FloatIconWindow : Window
         NativeWindow.MoveTopmostNoActivate(hwnd, screenTopLeft.X, screenTopLeft.Y, size, size);
     }
 
+    public void KeepAboveOthers()
+    {
+        if (!IsVisible)
+        {
+            return;
+        }
+
+        NativeWindow.KeepTopmost(Handle);
+    }
+
     public PixelRect ScreenRect => NativeWindow.GetRect(Handle);
 
     private void BuildMenu()

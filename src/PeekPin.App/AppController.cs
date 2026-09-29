@@ -232,6 +232,11 @@ public sealed class AppController : IDisposable
                 {
                     Gateway.TrySetTopmost(host.Session.Window, true);
                 }
+
+                if (host.Phase is SessionPhase.Docked or SessionPhase.Peeking)
+                {
+                    host.Icon.KeepAboveOthers();
+                }
             }
         }
 
