@@ -9,6 +9,12 @@ public static class NativeWindow
             return;
         }
 
+        var style = NativeMethods.GetWindowLongPtr(hwnd, NativeMethods.GwlExStyle);
+        if ((style & NativeMethods.WsExTopmost) == 0)
+        {
+            NativeMethods.SetWindowLongPtr(hwnd, NativeMethods.GwlExStyle, style | NativeMethods.WsExTopmost);
+        }
+
         NativeMethods.SetWindowPos(
             hwnd,
             NativeMethods.HwndTopmost,
@@ -16,7 +22,7 @@ public static class NativeWindow
             0,
             0,
             0,
-            NativeMethods.SwpNoMove | NativeMethods.SwpNoSize | NativeMethods.SwpNoActivate);
+            NativeMethods.SwpNoMove | NativeMethods.SwpNoSize | NativeMethods.SwpNoActivate | NativeMethods.SwpNoOwnerZOrder);
     }
 
     public static void MoveTopmostNoActivate(nint hwnd, int x, int y, int width, int height)

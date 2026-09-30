@@ -7,6 +7,7 @@ public sealed class AppController : IDisposable
     private readonly WindowEventHook? _hook;
     private readonly HashSet<nint> _known = [];
     private readonly System.Windows.Threading.DispatcherTimer _watchdog;
+    private readonly System.Windows.Threading.DispatcherTimer _topmost;
     private readonly System.Windows.Threading.Dispatcher _dispatcher;
     private bool _disposed;
 
@@ -41,6 +42,12 @@ public sealed class AppController : IDisposable
             }
         };
         _watchdog.Start();
+        _topmost = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.Render, _dispatcher)
+        {
+            Interval = TimeSpan.FromMilliseconds(200)
+        };
+        _topmost.Tick += (_, _) => KeepFloatIconsAbove();
+        _topmost.Start();
         RebindFromConfig();
     }
 
@@ -188,6 +195,7 @@ public sealed class AppController : IDisposable
 
         _disposed = true;
         _watchdog.Stop();
+        _topmost.Stop();
         _hook?.Dispose();
         foreach (var host in _sessions.ToArray())
         {
@@ -212,6 +220,22 @@ public sealed class AppController : IDisposable
     {
         var session = new WatchSession(target);
         return new SessionHost(this, Gateway, session, System.Windows.Threading.Dispatcher.CurrentDispatcher);
+    }
+
+    private void KeepFloatIconsAbove()
+    {
+        if (IsPaused || IsFullscreenSuppressed)
+        {
+            return;
+        }
+
+        foreach (var host in _sessions)
+        {
+            if (host.Phase is SessionPhase.Docked or SessionPhase.Peeking)
+            {
+                host.Icon.KeepAboveOthers();
+            }
+        }
     }
 
     private void OnMinimized(WindowId id)

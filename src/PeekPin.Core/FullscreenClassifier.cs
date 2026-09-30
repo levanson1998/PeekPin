@@ -7,6 +7,11 @@ public static class FullscreenClassifier
         return className is "Progman" or "WorkerW" or "Shell_TrayWnd" or "Shell_SecondaryTrayWnd";
     }
 
+    public static bool IsRemoteDesktopClient(string? className)
+    {
+        return className is "IHWindowClass" or "TscShellContainerClass" or "OPContainerClass";
+    }
+
     public static bool ShouldHideFloatIcon(
         string? className,
         bool isZoomed,
@@ -15,7 +20,7 @@ public static class FullscreenClassifier
         PixelRect window,
         PixelRect monitor)
     {
-        if (IsShellDesktop(className) || isZoomed || isIconic)
+        if (IsShellDesktop(className) || IsRemoteDesktopClient(className) || isZoomed || isIconic)
         {
             return false;
         }

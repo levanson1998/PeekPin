@@ -22,6 +22,7 @@ internal static class NativeMethods
     public const int SwpNoSize = 0x0001;
     public const int SwpNoMove = 0x0002;
     public const int SwpNoActivate = 0x0010;
+    public const int SwpNoOwnerZOrder = 0x0200;
     public const int SwpShowWindow = 0x0040;
     public const int SwpFrameChanged = 0x0020;
     public const int HWND_TOPMOST = -1;

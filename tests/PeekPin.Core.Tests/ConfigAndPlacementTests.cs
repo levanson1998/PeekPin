@@ -107,6 +107,8 @@ public class ConfigAndPlacementTests
         Assert.False(FullscreenClassifier.ShouldHideFloatIcon("Progman", false, false, false, monitor, monitor));
         Assert.False(FullscreenClassifier.ShouldHideFloatIcon("Notepad", false, false, true, monitor, monitor));
         Assert.True(FullscreenClassifier.ShouldHideFloatIcon("ApplicationFrameWindow", false, false, false, monitor, monitor));
+        Assert.False(FullscreenClassifier.ShouldHideFloatIcon("IHWindowClass", false, false, false, monitor, monitor));
+        Assert.True(FullscreenClassifier.IsRemoteDesktopClient("TscShellContainerClass"));
     }
 
     private static WindowSnapshot Snap(bool tool = false, string title = "Title", bool cloaked = false, int pid = 2)
