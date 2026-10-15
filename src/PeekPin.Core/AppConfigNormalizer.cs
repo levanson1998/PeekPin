@@ -29,6 +29,28 @@ public static class AppConfigNormalizer
         return config;
     }
 
+    public static AppConfig ForDisk(AppConfig config)
+    {
+        if (config.RememberPinnedApps)
+        {
+            return config;
+        }
+
+        return new AppConfig
+        {
+            Version = config.Version,
+            HoverDelayMs = config.HoverDelayMs,
+            HideDelayMs = config.HideDelayMs,
+            IconSize = config.IconSize,
+            StartWithWindows = config.StartWithWindows,
+            HideIconWhenFullscreen = config.HideIconWhenFullscreen,
+            RememberIconPosition = config.RememberIconPosition,
+            RememberPinnedApps = false,
+            Language = config.Language,
+            Targets = []
+        };
+    }
+
     public static bool TryAddTarget(AppConfig config, TargetConfig target)
     {
         if (config.Targets.Count >= AppConfig.MaxTargets)

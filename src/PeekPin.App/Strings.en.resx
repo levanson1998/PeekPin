@@ -24,6 +24,7 @@
   <data name="HideDelay" xml:space="preserve"><value>Hide delay (ms)</value></data>
   <data name="IconSize" xml:space="preserve"><value>Icon size</value></data>
   <data name="RememberPosition" xml:space="preserve"><value>Remember icon position</value></data>
+  <data name="RememberPinnedApps" xml:space="preserve"><value>Remember pinned apps</value></data>
   <data name="StartWithWindows" xml:space="preserve"><value>Start with Windows</value></data>
   <data name="HideIconWhenFullscreen" xml:space="preserve"><value>Hide icon during fullscreen</value></data>
   <data name="WatchedTitle" xml:space="preserve"><value>Watching</value></data>

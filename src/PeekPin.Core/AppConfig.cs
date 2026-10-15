@@ -22,6 +22,8 @@ public sealed class AppConfig
 
     public bool RememberIconPosition { get; set; } = true;
 
+    public bool RememberPinnedApps { get; set; }
+
     public string Language { get; set; } = "vi";
 
     public List<TargetConfig> Targets { get; set; } = [];

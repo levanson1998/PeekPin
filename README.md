@@ -55,10 +55,11 @@ Quit chỉ tắt PeekPin. Cửa sổ đang xem tạm được thu nhỏ lại. C
 | Độ trễ ẩn | 250 ms (50–2000) |
 | Cỡ icon | 48 (32, 48 hoặc 64) |
 | Nhớ vị trí icon | Bật |
+| Tự lưu app đang pin | Tắt |
 | Chạy cùng Windows | Tắt |
 | Ẩn icon khi có app fullscreen | Bật |
 
-Bấm **Lưu** thì cấu hình, danh sách đang theo dõi và vị trí icon được ghi vào `%AppData%\PeekPin\config.json`. Trước lúc bấm Lưu, những thay đổi chỉ nằm trong bộ nhớ và mất khi thoát. Log chỉ ghi khi có lỗi, tại `%AppData%\PeekPin\logs\peekpin.log`.
+Bấm **Lưu** thì cấu hình được ghi vào `%AppData%\PeekPin\config.json`. Danh sách app đang pin chỉ được ghi khi **Tự lưu app đang pin** đang bật; mặc định mục này tắt, nên lần mở sau không gắn lại các app đã pin. Trước lúc bấm Lưu, những thay đổi chỉ nằm trong bộ nhớ và mất khi thoát. Log chỉ ghi khi có lỗi, tại `%AppData%\PeekPin\logs\peekpin.log`.
 
 ### Giới hạn
 
@@ -145,10 +146,11 @@ Quit only closes PeekPin. A window that was being peeked is minimized. A window 
 | Hide delay | 250 ms (50–2000) |
 | Icon size | 48 (32, 48, or 64) |
 | Remember icon position | On |
+| Remember pinned apps | Off |
 | Start with Windows | Off |
 | Hide icon during fullscreen | On |
 
-Click **Save** to write settings, the watched list, and icon positions to `%AppData%\PeekPin\config.json`. Until then those changes stay in memory and are discarded on exit. The log is written only for errors, at `%AppData%\PeekPin\logs\peekpin.log`.
+Click **Save** to write settings to `%AppData%\PeekPin\config.json`. The pinned-app list is written only when **Remember pinned apps** is on. That option is off by default, so the next launch does not restore pinned apps. Until Save, changes stay in memory and are discarded on exit. The log is written only for errors, at `%AppData%\PeekPin\logs\peekpin.log`.
 
 ### Limits
 

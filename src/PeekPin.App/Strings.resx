@@ -24,6 +24,7 @@
   <data name="HideDelay" xml:space="preserve"><value>Độ trễ ẩn (ms)</value></data>
   <data name="IconSize" xml:space="preserve"><value>Cỡ icon</value></data>
   <data name="RememberPosition" xml:space="preserve"><value>Nhớ vị trí icon</value></data>
+  <data name="RememberPinnedApps" xml:space="preserve"><value>Tự lưu app đang pin</value></data>
   <data name="StartWithWindows" xml:space="preserve"><value>Chạy cùng Windows</value></data>
   <data name="HideIconWhenFullscreen" xml:space="preserve"><value>Ẩn icon khi có app fullscreen</value></data>
   <data name="WatchedTitle" xml:space="preserve"><value>Đang theo dõi</value></data>

@@ -26,6 +26,7 @@ public static class Strings
     public static string HideDelay => Get(nameof(HideDelay));
     public static string IconSize => Get(nameof(IconSize));
     public static string RememberPosition => Get(nameof(RememberPosition));
+    public static string RememberPinnedApps => Get(nameof(RememberPinnedApps));
     public static string StartWithWindows => Get(nameof(StartWithWindows));
     public static string HideIconWhenFullscreen => Get(nameof(HideIconWhenFullscreen));
     public static string WatchedTitle => Get(nameof(WatchedTitle));

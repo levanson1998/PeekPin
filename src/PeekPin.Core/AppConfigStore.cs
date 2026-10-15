@@ -31,7 +31,13 @@ public sealed class AppConfigStore
         {
             var json = File.ReadAllText(FilePath);
             var config = JsonSerializer.Deserialize<AppConfig>(json, JsonOptions);
-            return AppConfigNormalizer.Normalize(config);
+            config = AppConfigNormalizer.Normalize(config);
+            if (!config.RememberPinnedApps)
+            {
+                config.Targets = [];
+            }
+
+            return config;
         }
         catch (JsonException)
         {
@@ -42,7 +48,7 @@ public sealed class AppConfigStore
     public void Save(AppConfig config)
     {
         Directory.CreateDirectory(_directory);
-        var normalized = AppConfigNormalizer.Normalize(config);
+        var normalized = AppConfigNormalizer.ForDisk(AppConfigNormalizer.Normalize(config));
         var json = JsonSerializer.Serialize(normalized, JsonOptions);
         var tempPath = FilePath + ".tmp";
         File.WriteAllText(tempPath, json);

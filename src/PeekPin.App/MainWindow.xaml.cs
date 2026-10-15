@@ -46,6 +46,7 @@ public partial class MainWindow : Window
         HideLabel.Text = Strings.HideDelay;
         SizeLabel.Text = Strings.IconSize;
         RememberBox.Content = Strings.RememberPosition;
+        RememberPinnedBox.Content = Strings.RememberPinnedApps;
         StartupBox.Content = Strings.StartWithWindows;
         FullscreenBox.Content = Strings.HideIconWhenFullscreen;
         AddButton.Content = Strings.AddWindow;
@@ -113,6 +114,7 @@ public partial class MainWindow : Window
         HideBox.Text = _controller.Config.HideDelayMs.ToString();
         SizeBox.SelectedItem = _controller.Config.IconSize;
         RememberBox.IsChecked = _controller.Config.RememberIconPosition;
+        RememberPinnedBox.IsChecked = _controller.Config.RememberPinnedApps;
         StartupBox.IsChecked = _controller.Config.StartWithWindows;
         FullscreenBox.IsChecked = _controller.Config.HideIconWhenFullscreen;
         var code = _controller.Config.Language == UiLanguage.English ? UiLanguage.English : UiLanguage.Vietnamese;
@@ -233,6 +235,7 @@ public partial class MainWindow : Window
         }
 
         _controller.Config.RememberIconPosition = RememberBox.IsChecked == true;
+        _controller.Config.RememberPinnedApps = RememberPinnedBox.IsChecked == true;
         _controller.Config.StartWithWindows = StartupBox.IsChecked == true;
         _controller.Config.HideIconWhenFullscreen = FullscreenBox.IsChecked == true;
         _controller.Save();

@@ -14,6 +14,7 @@ public class ConfigAndPlacementTests
         {
             HoverDelayMs = 0,
             IconSize = 40,
+            RememberPinnedApps = true,
             Targets = [new TargetConfig { ProcessName = "notepad", ClassName = "Notepad", Title = "Untitled" }]
         };
         store.Save(config);
@@ -21,8 +22,26 @@ public class ConfigAndPlacementTests
         Assert.Equal(100, loaded.HoverDelayMs);
         Assert.Equal(48, loaded.IconSize);
         Assert.Equal("notepad", loaded.Targets[0].ProcessName);
+        Assert.True(loaded.RememberPinnedApps);
         Assert.Equal("vi", loaded.Language);
         Assert.False(File.Exists(store.FilePath + ".tmp"));
+    }
+
+    [Fact]
+    public void RememberPinnedApps_Off_DropsTargetsOnDisk()
+    {
+        var directory = Path.Combine(Path.GetTempPath(), "peekpin-tests", Guid.NewGuid().ToString("N"));
+        var store = new AppConfigStore(directory);
+        var config = new AppConfig
+        {
+            Targets = [new TargetConfig { ProcessName = "notepad", ClassName = "Notepad", Title = "Untitled" }]
+        };
+        Assert.False(config.RememberPinnedApps);
+        store.Save(config);
+        Assert.Single(config.Targets);
+        var loaded = store.Load();
+        Assert.Empty(loaded.Targets);
+        Assert.False(loaded.RememberPinnedApps);
     }
 
     [Fact]
